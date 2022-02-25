@@ -3,5 +3,140 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "ngx-nouislider": {
+      "projectType": "library",
+      "root": "projects/ngx-nouislider",
+      "sourceRoot": "projects/ngx-nouislider/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-nouislider/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-nouislider/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-nouislider/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-nouislider/src/test.ts",
+            "tsConfig": "projects/ngx-nouislider/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-nouislider/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-nouislider-example": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/ngx-nouislider-example",
+      "sourceRoot": "projects/ngx-nouislider-example/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-nouislider-example",
+            "index": "projects/ngx-nouislider-example/src/index.html",
+            "main": "projects/ngx-nouislider-example/src/main.ts",
+            "polyfills": "projects/ngx-nouislider-example/src/polyfills.ts",
+            "tsConfig": "projects/ngx-nouislider-example/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ngx-nouislider-example/src/favicon.ico",
+              "projects/ngx-nouislider-example/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-nouislider-example/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-nouislider-example/src/environments/environment.ts",
+                  "with": "projects/ngx-nouislider-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-nouislider-example:build:production"
+            },
+            "development": {
+              "browserTarget": "ngx-nouislider-example:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-nouislider-example:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-nouislider-example/src/test.ts",
+            "polyfills": "projects/ngx-nouislider-example/src/polyfills.ts",
+            "tsConfig": "projects/ngx-nouislider-example/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-nouislider-example/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ngx-nouislider-example/src/favicon.ico",
+              "projects/ngx-nouislider-example/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-nouislider-example/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngx-nouislider"
 }
